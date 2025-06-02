@@ -36,21 +36,41 @@ void BadGuy::DrawBadGuy()
 	}
 
 }
-void BadGuy::StartBadGuy(int WIDTH, int HEIGHT )
+void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy bg[], int bgnum)
 {
-
-	if(!live)
+	if (!live)
 	{
 		if(rand() % 500 == 0)
 		{
 			live = true;
 			do{
-				x =  rand() % (WIDTH - boundx); 
+				x =  rand() % (WIDTH - boundx);
 			}while (x <100);
+			for (int j = 0; j < bgnum; j++)
+			{
+				if (bg[j].getLive())
+				{
+					if ((x + boundx) > (bg[j].getX() - bg[j].getBoundX()) &&
+						(x - boundx) < (bg[j].getX() + bg[j].getBoundX()))
+					{
+						!live;
+					}
+				}
+			}
 			do{
 				y =  rand() % (HEIGHT - boundy);
 			}while (y<100);
-
+			for (int j = 0; j < bgnum; j++)
+			{
+				if (bg[j].getLive())
+				{
+					if ((y + boundy) > (bg[j].getY() - bg[j].getBoundY()) &&
+						(y - boundy) < (bg[j].getY() + bg[j].getBoundY()))
+					{
+						!live;
+					}
+				}
+			}
 		}
 	}
 }
