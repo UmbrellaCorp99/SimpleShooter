@@ -21,8 +21,8 @@ BadGuy::BadGuy()
 	al_draw_filled_circle(32,32,4,al_map_rgb(255, 255, 255));
 	al_draw_filled_circle(16,32,4,al_map_rgb(120, 255, 255));
 	al_draw_filled_circle(48,32,4,al_map_rgb(255, 255, 120));
-	boundx = al_get_bitmap_width(image)*.75;
-	boundy = al_get_bitmap_height(image)*.75;
+	boundx = al_get_bitmap_width(image);
+	boundy = al_get_bitmap_height(image);
 	live = false;
 
 }
@@ -45,32 +45,10 @@ void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy bg[], int bgnum)
 			live = true;
 			do{
 				x =  rand() % (WIDTH - boundx);
-			}while (x <100);
-			for (int j = 0; j < bgnum; j++)
-			{
-				if (bg[j].getLive())
-				{
-					if ((x + boundx) > (bg[j].getX() - bg[j].getBoundX()) &&
-						(x - boundx) < (bg[j].getX() + bg[j].getBoundX()))
-					{
-						!live;
-					}
-				}
-			}
-			do{
-				y =  rand() % (HEIGHT - boundy);
-			}while (y<100);
-			for (int j = 0; j < bgnum; j++)
-			{
-				if (bg[j].getLive())
-				{
-					if ((y + boundy) > (bg[j].getY() - bg[j].getBoundY()) &&
-						(y - boundy) < (bg[j].getY() + bg[j].getBoundY()))
-					{
-						!live;
-					}
-				}
-			}
+			}while (x < 100);
+			do {
+				y = rand() % (HEIGHT - boundy);
+			} while (y < 100);
 		}
 	}
 }

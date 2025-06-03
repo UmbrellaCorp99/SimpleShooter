@@ -45,42 +45,14 @@ void player::MoveUp(BadGuy bg[], int bgnum)
 	y -= speed;
 	if (y < 0) {
 		y = 0;
-	}
-	for (int j = 0; j < bgnum; j++)
-	{
-		if (bg[j].getLive())
-		{
-			if ((x + boundx / 2) > (bg[j].getX() - bg[j].getBoundX()) &&
-				(x - boundx / 2) < (bg[j].getX() + bg[j].getBoundX()) &&
-				(y + boundy / 2) > (bg[j].getY() - bg[j].getBoundY()) &&
-				(y - boundy / 2) < (bg[j].getY() + bg[j].getBoundY()))
-			{
-				y = (bg[j].getY() + bg[j].getBoundY()) + boundy / 2;
-			}
-		}
-	}
-		
+	}	
 }
 void player::MoveDown(int HEIGHT, BadGuy bg[], int bgnum)
 {
 	y += speed;
 	if (y > HEIGHT - boundy) {
 		y = HEIGHT-boundy;
-	}
-	for (int j = 0; j < bgnum; j++)
-	{
-		if (bg[j].getLive())
-		{
-			if ((x + boundx / 2) > (bg[j].getX() - bg[j].getBoundX()) &&
-				(x - boundx / 2) < (bg[j].getX() + bg[j].getBoundX()) &&
-				(y + boundy / 2) > (bg[j].getY() - bg[j].getBoundY()) &&
-				(y - boundy / 2) < (bg[j].getY() + bg[j].getBoundY()))
-			{
-				y = (bg[j].getY() - bg[j].getBoundY()) - boundy / 2;
-			}
-		}
-	}
-		
+	}	
 }
 void player::MoveLeft(BadGuy bg[], int bgnum)
 {
@@ -92,16 +64,14 @@ void player::MoveLeft(BadGuy bg[], int bgnum)
 	{
 		if (bg[j].getLive())
 		{
-			if ((x + boundx / 2) > (bg[j].getX() - bg[j].getBoundX()) &&
-				(x - boundx / 2) < (bg[j].getX() + bg[j].getBoundX()) &&
-				(y + boundy / 2) > (bg[j].getY() - bg[j].getBoundY()) &&
-				(y - boundy / 2) < (bg[j].getY() + bg[j].getBoundY()))
+			if (((y > bg[j].getY()) && y < (bg[j].getY() + bg[j].getBoundY()) || 
+				(((y + boundy) > bg[j].getY()) && ((y + boundy) < (bg[j].getY() + bg[j].getBoundY())))) &&
+				(x > (bg[j].getX())) && (x < (bg[j].getX() + bg[j].getBoundX())))
 			{
-				x = (bg[j].getX() + bg[j].getBoundX()) + boundx / 2;
+				x = (bg[j].getX() + bg[j].getBoundX());
 			}
 		}
 	}
-		
 }
 void player::MoveRight(int WIDTH, BadGuy bg[], int bgnum)
 {
@@ -113,12 +83,11 @@ void player::MoveRight(int WIDTH, BadGuy bg[], int bgnum)
 	{
 		if (bg[j].getLive())
 		{
-			if ((x + boundx/2) > (bg[j].getX() - bg[j].getBoundX()) &&
-				(x - boundx/2) < (bg[j].getX() + bg[j].getBoundX()) &&
-				(y + boundy/2) >(bg[j].getY() - bg[j].getBoundY()) &&
-				(y - boundy/2) < (bg[j].getY() + bg[j].getBoundY()))
+			if (((y > bg[j].getY()) && y < (bg[j].getY() + bg[j].getBoundY()) ||
+				(((y + boundy) > bg[j].getY()) && ((y + boundy) < (bg[j].getY() + bg[j].getBoundY())))) &&
+				(x < bg[j].getX()) && ((x + boundx) > (bg[j].getX())))
 			{
-				x = (bg[j].getX() - bg[j].getBoundX()) - boundx/2;
+				x = (bg[j].getX() - boundx);
 			}
 		}
 	}
