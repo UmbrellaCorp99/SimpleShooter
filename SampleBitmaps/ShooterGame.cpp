@@ -12,7 +12,7 @@
 int main(void)
 {
 
-
+	//variables used within the main function
 	const int WIDTH = 800;
 	const int HEIGHT = 400;
 	const int NUM_weapons = 5;
@@ -39,7 +39,8 @@ int main(void)
 
 	if(!display)										//test display object
 		return -1;
-
+	
+	//initializing the privitives, keyboard, and image addons
 	al_init_primitives_addon();
 	al_install_keyboard();
 	al_init_image_addon();
@@ -50,6 +51,7 @@ int main(void)
 	weapon weapons[NUM_weapons];
 	BadGuy BadGuys[NUM_BadGuyS];
 
+	//creating player bitmap, event queue, and timer
 	myPlayer.createImageBM(display);
 	al_set_target_bitmap(al_get_backbuffer(display));
 	event_queue = al_create_event_queue();
@@ -57,9 +59,12 @@ int main(void)
 
 	srand(time(NULL));
 
+	//tyring keyboard, timer, and display into event queue
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_register_event_source(event_queue, al_get_display_event_source(display));
+	
+	//pulling the bitmap to the front buffer
 	al_set_target_bitmap(al_get_backbuffer(display));
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 	myPlayer.DrawPlayer();
@@ -70,8 +75,10 @@ int main(void)
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
 
+		//If the event queue gets a timer event
 		if(ev.type == ALLEGRO_EVENT_TIMER)
 		{
+			//Move the player if the direction keys were pressed
 			redraw = true;
 			if(keys[UP])
 				myPlayer.MoveUp(BadGuys, NUM_BadGuyS);
@@ -81,6 +88,7 @@ int main(void)
 				myPlayer.MoveLeft(BadGuys, NUM_BadGuyS);
 			if(keys[RIGHT])
 				myPlayer.MoveRight(WIDTH, BadGuys, NUM_BadGuyS);
+			//update the status of weapons and bad guys on the display
 			for(int i=0;i<NUM_weapons;i++)
 				weapons[i].Updateweapon(WIDTH, HEIGHT);
 			for(int i=0;i<NUM_BadGuyS;i++)
@@ -95,6 +103,7 @@ int main(void)
 		}
 		else if(ev.type == ALLEGRO_EVENT_KEY_DOWN)
 		{
+			//store the following keyboard inputs for parsing during the next loop
 			switch(ev.keyboard.keycode)
 			{
 			case ALLEGRO_KEY_ESCAPE:
@@ -112,6 +121,7 @@ int main(void)
 			case ALLEGRO_KEY_RIGHT:
 				keys[RIGHT] = true;
 				break;
+				//if space is pressed, fire the weapon
 			case ALLEGRO_KEY_SPACE:
 				keys[SPACE] = true;
 				for(int i=0;i<NUM_weapons;i++)
@@ -144,6 +154,7 @@ int main(void)
 			}
 		}
 
+		//after every game loop, draw new bad guys and weapons if needed 
 		if(redraw && al_is_event_queue_empty(event_queue))
 		{
 			redraw = false; 
@@ -159,6 +170,7 @@ int main(void)
 		}
 	}
 
+	//destroy the following pointers from memory
 	al_destroy_event_queue(event_queue);
 	al_destroy_timer(timer);
 	al_destroy_display(display);						//destroy our display object

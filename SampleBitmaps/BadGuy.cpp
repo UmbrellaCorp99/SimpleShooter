@@ -1,8 +1,16 @@
 #include "BadGuy.h"
+
+//Deconstructor for the BadGuy class
+//Takes no parameters
+//No return
 BadGuy::~BadGuy()
 {
 	al_destroy_bitmap(image);
 }
+
+//Constructor for the BadGuy class, creates a bitmap and sets private variables
+//Takes no parameters
+//No return
 BadGuy::BadGuy()
 {
 	image = al_create_bitmap(64,64);   
@@ -26,6 +34,10 @@ BadGuy::BadGuy()
 	live = false;
 
 }
+
+//Draws a BadGuy bitmap at the provided x and y location
+//Takes no parameters
+//No return
 void BadGuy::DrawBadGuy()
 {
 	if(live)
@@ -33,6 +45,10 @@ void BadGuy::DrawBadGuy()
 		al_draw_bitmap(image,x,y,0);
 	}
 }
+
+//This function generates a random x and y location for a BadGuy to spawn at, ensuring no overlap
+//Takes two integers representing the display's height and width, BadGuy objects, and and int representing the number of BadGuys as parameters
+//No return
 void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy bg[], int bgnum)
 {
 	if (!live)

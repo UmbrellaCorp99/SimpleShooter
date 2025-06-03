@@ -3,12 +3,19 @@
 #include <allegro5\allegro_image.h>
 #include "player.h"
 
+//Deconstructor for the player class
+//Takes no parameters
+//No return
 player::~player()
 {
 	for (int i = 0; i < 4; i++) {
 		al_destroy_bitmap(image[i]);
 	}
 }
+
+//Constructor for the player class, sets private variables and creates 4 bitmaps
+//Takes an integers representing the height of the display as the parameter
+//No return
 player::player(int HEIGHT)
 {
 	for (int i = 0; i < 4; i++) {
@@ -21,10 +28,18 @@ player::player(int HEIGHT)
 	speed = 7;
 
 }
+
+//This function draws a player, dependant on the direction provided
+//Takes no parameters
+//No return
 void player::DrawPlayer()
 {
 	al_draw_bitmap(image[getDir()], x, y, 0);
 }
+
+//This function creates 4 bitmaps
+//Takes the display as the parameter
+//No return
 void player::createImageBM(ALLEGRO_DISPLAY* display) {
 	for (int i = 0; i < 4; i++)
 	{
@@ -73,6 +88,10 @@ void player::createImageBM(ALLEGRO_DISPLAY* display) {
 		}
 	}
 }
+
+//This function moves the character up and sets the dir variable to allow for the bitmap to face up. Collision detection with BadGuys included
+//Takes a BadGuy object and and integer representing the number of BadGuys as parameters
+//No return
 void player::MoveUp(BadGuy bg[], int bgnum)
 {
 	dir = 0;
@@ -93,6 +112,10 @@ void player::MoveUp(BadGuy bg[], int bgnum)
 		}
 	}
 }
+
+//This function moves the character down and sets the dir variable to allow for the bitmap to face down. Collision detection with BadGuys included
+//Takes a BadGuy object and and integer representing the number of BadGuys as parameters
+//No return
 void player::MoveDown(int HEIGHT, BadGuy bg[], int bgnum)
 {
 	dir = 2;
@@ -113,6 +136,10 @@ void player::MoveDown(int HEIGHT, BadGuy bg[], int bgnum)
 		}
 	}
 }
+//This function moves the character left and sets the dir variable to allow for the bitmap to face left. Collision detection with BadGuys included
+//Takes a BadGuy object and and integer representing the number of BadGuys as parameters
+//No return
+
 void player::MoveLeft(BadGuy bg[], int bgnum)
 {
 	dir = 3;
@@ -133,6 +160,10 @@ void player::MoveLeft(BadGuy bg[], int bgnum)
 		}
 	}
 }
+
+//This function moves the character right and sets the dir variable to allow for the bitmap to face right. Collision detection with BadGuys included
+//Takes a BadGuy object and and integer representing the number of BadGuys as parameters
+//No return
 void player::MoveRight(int WIDTH, BadGuy bg[], int bgnum)
 {
 	dir = 1;

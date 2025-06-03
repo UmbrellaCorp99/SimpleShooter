@@ -3,11 +3,17 @@
 #include <allegro5\allegro_image.h>
 #include "weapon.h"
 
-
+//This is a deconstructor for the weapon class
+//Takes no parameters
+//No return
 weapon::~weapon()
 {
 	al_destroy_bitmap(image);
 }
+
+//This is a constructor for the weapon class. It creates a bitmap for the weapon and sets the private variables
+//Takes no parameters
+//No return
 weapon::weapon()
 {
 	speed = 10;
@@ -37,6 +43,10 @@ weapon::weapon()
 	angle=0;
 	dir = 0;
 }
+
+//This function draws the weapon. Every time it is drawn, it rotates by .1 degrees
+//Takes no parameters
+//No return
 void weapon::Drawweapon()
 {
 
@@ -45,6 +55,10 @@ void weapon::Drawweapon()
 		angle+=.1;
 	}
 }
+
+//This function fires the weapon in the direction that the player is facing from the appropriate location
+//Takes a player object as a parameter
+//No return
 void weapon::Fireweapon( player &Player)
 {
 	if(!live)
@@ -72,6 +86,10 @@ void weapon::Fireweapon( player &Player)
 		live = true;
 	}
 }
+
+//This function updates the location of the weapon after being fired, dependant on the location the player was facing when it was fired
+//Takes two integers representing the height and width of the display
+//No return
 void weapon::Updateweapon(int WIDTH, int HEIGHT)
 {
 	if(live)
@@ -100,6 +118,10 @@ void weapon::Updateweapon(int WIDTH, int HEIGHT)
 		}
 	}
 }
+
+//This function changes the status of a BadGuy and the weapon upon collision with the weapon
+//Takes BadGuy objects and and int representing the number of BadGuys as parameters
+//No return
 void weapon::Collideweapon(BadGuy BadGuys[], int cSize)
 {
 	if(live)
