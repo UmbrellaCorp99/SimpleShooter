@@ -58,6 +58,15 @@ void weapon::Fireweapon( player &Player)
 		case 1:
 			x = Player.getX() + Player.getBoundX();
 			y = Player.getY() + Player.getBoundY() / 2;
+			break;
+		case 2:
+			x = Player.getX() + Player.getBoundX() / 2;
+			y = Player.getY() + Player.getBoundY();
+			break;
+		case 3:
+			x = Player.getX();
+			y = Player.getY() + Player.getBoundY() / 2;
+			break;
 		}
 		
 		live = true;
@@ -77,6 +86,16 @@ void weapon::Updateweapon(int WIDTH, int HEIGHT)
 			x += speed;
 			if (x > WIDTH)
 			live = false;
+			break;
+		case 2:
+			y += speed;
+			if (y > HEIGHT)
+				live = false;
+			break;
+		case 3:
+			x -= speed;
+			if (x < 0)
+				live = false;
 			break;
 		}
 	}
