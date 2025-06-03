@@ -45,14 +45,38 @@ void player::MoveUp(BadGuy bg[], int bgnum)
 	y -= speed;
 	if (y < 0) {
 		y = 0;
-	}	
+	}
+	for (int j = 0; j < bgnum; j++)
+	{
+		if (bg[j].getLive())
+		{
+			if (((x > bg[j].getX()) && x < (bg[j].getX() + bg[j].getBoundX()) ||
+				(((x + boundx) > bg[j].getX()) && ((x + boundx) < (bg[j].getX() + bg[j].getBoundX())))) &&
+				(y > bg[j].getY()) && (y < (bg[j].getY() + bg[j].getBoundY())))
+			{
+				y = (bg[j].getY() + bg[j].getBoundY());
+			}
+		}
+	}
 }
 void player::MoveDown(int HEIGHT, BadGuy bg[], int bgnum)
 {
 	y += speed;
 	if (y > HEIGHT - boundy) {
 		y = HEIGHT-boundy;
-	}	
+	}
+	for (int j = 0; j < bgnum; j++)
+	{
+		if (bg[j].getLive())
+		{
+			if (((x > bg[j].getX()) && x < (bg[j].getX() + bg[j].getBoundX()) ||
+				(((x + boundx) > bg[j].getX()) && ((x + boundx) < (bg[j].getX() + bg[j].getBoundX())))) &&
+				(y < (bg[j].getY())) && ((y + boundy) > (bg[j].getY())))
+			{
+				y = (bg[j].getY() - boundy);
+			}
+		}
+	}
 }
 void player::MoveLeft(BadGuy bg[], int bgnum)
 {
