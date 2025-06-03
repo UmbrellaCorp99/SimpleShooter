@@ -44,12 +44,14 @@ int main(void)
 	al_install_keyboard();
 	al_init_image_addon();
 
+
 	//object variables
 	player myPlayer(HEIGHT);
 	weapon weapons[NUM_weapons];
 	BadGuy BadGuys[NUM_BadGuyS];
 
-
+	myPlayer.createImageBM(display);
+	al_set_target_bitmap(al_get_backbuffer(display));
 	event_queue = al_create_event_queue();
 	timer = al_create_timer(1.0 / FPS);
 
@@ -59,6 +61,9 @@ int main(void)
 	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_set_target_bitmap(al_get_backbuffer(display));
+	al_clear_to_color(al_map_rgb(0, 0, 0));
+	myPlayer.DrawPlayer();
+	al_flip_display();
 	al_start_timer(timer);
 	while(!done)
 	{

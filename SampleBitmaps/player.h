@@ -16,15 +16,18 @@ public:
 	void MoveRight(int WIDTH, BadGuy bg[], int bgnum);
 	int getBoundX(){return boundx;}
 	int getBoundY(){return boundy;}
+	void createImageBM(ALLEGRO_DISPLAY* display);
+	int getDir(){ return dir;}
 	int getX(){return x;}
 	int getY(){return y;}
 private:
 	int x;
 	int y;
+	int dir;
 	int speed;
 	int boundx;
 	int boundy;
-	ALLEGRO_BITMAP *image;
+	ALLEGRO_BITMAP *image[4];
 };
 #endif
 
