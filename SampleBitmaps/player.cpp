@@ -19,7 +19,8 @@ player::player(int HEIGHT)
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
 	al_draw_filled_rectangle(0,25,64,39,al_map_rgb(75, 75, 75));
-	al_draw_filled_rectangle(25,0,39,64,al_map_rgb(50, 50, 50));		
+	al_draw_filled_rectangle(25,0,39,64,al_map_rgb(50, 50, 50));
+	al_draw_filled_triangle(39, 25, 35, 35, 64, 50, al_map_rgb(255, 0, 0));
 	al_draw_circle(32,32,8,al_map_rgb(0, 0, 0),5);
 
 	al_draw_line(0,32,64,32,al_map_rgb(255, 100, 255),2);

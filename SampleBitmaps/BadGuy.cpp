@@ -43,9 +43,9 @@ void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy bg[], int bgnum)
 		if(rand() % 500 == 0)
 		{
 			live = true;
-			do{
-				x =  rand() % (WIDTH - boundx);
-			}while (x < 100);
+			do {
+				x = rand() % (WIDTH - boundx);
+			} while (x < 100);
 			do {
 				y = rand() % (HEIGHT - boundy);
 			} while (y < 100);
