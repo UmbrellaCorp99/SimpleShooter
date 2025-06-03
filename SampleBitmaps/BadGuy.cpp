@@ -28,27 +28,41 @@ BadGuy::BadGuy()
 }
 void BadGuy::DrawBadGuy()
 {
-
-
 	if(live)
 	{
 		al_draw_bitmap(image,x,y,0);
 	}
-
 }
 void BadGuy::StartBadGuy(int WIDTH, int HEIGHT, BadGuy bg[], int bgnum)
 {
 	if (!live)
 	{
-		if(rand() % 500 == 0)
+		if (rand() % 500 == 0)
 		{
 			live = true;
+			bool collision;
+			const int buffer = 64; //buffer distance this relates to how big your bitmap is
+
 			do {
+				collision = false;
 				x = rand() % (WIDTH - boundx);
-			} while (x < 100);
-			do {
 				y = rand() % (HEIGHT - boundy);
-			} while (y < 100);
+
+				// Check for collision with other bad guys
+				for (int i = 0; i < bgnum; i++)
+				{
+					if (bg[i].getLive() && &bg[i] != this)
+					{
+						// buffer in collision check
+						if (x > (bg[i].getX() - bg[i].getBoundX() - buffer) && x < (bg[i].getX() + bg[i].getBoundX() + buffer) &&
+							y >(bg[i].getY() - bg[i].getBoundY() - buffer) && y < (bg[i].getY() + bg[i].getBoundY() + buffer))
+						{
+							collision = true;
+							break;
+						}
+					}
+				}
+			} while (collision);
 		}
 	}
 }
