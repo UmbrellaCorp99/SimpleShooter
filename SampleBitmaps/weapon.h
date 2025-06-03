@@ -9,11 +9,12 @@ public:
 	~weapon();
 	void Drawweapon();
 	void Fireweapon(player &Player);
-	void Updateweapon(int WIDTH);
+	void Updateweapon(int WIDTH, int HEIGHT);
 	void Collideweapon(BadGuy BadGuys[], int cSize);
 private:
 	int x;
 	int y;
+	int dir;
 	int boundx;
 	int boundy;
 	bool live;

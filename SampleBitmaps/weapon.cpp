@@ -35,7 +35,7 @@ weapon::weapon()
 	boundy = al_get_bitmap_height(image)/2;
 	live=false;
 	angle=0;
-
+	dir = 0;
 }
 void weapon::Drawweapon()
 {
@@ -48,19 +48,37 @@ void weapon::Drawweapon()
 void weapon::Fireweapon( player &Player)
 {
 	if(!live)
-	{
-		x = Player.getX() + Player.getBoundX();
-		y = Player.getY() + Player.getBoundY()/2;
+	{	
+		dir = Player.getDir();
+		switch (dir) {
+		case 0:
+			x = Player.getX() + Player.getBoundX()/2;
+			y = Player.getY();
+			break;
+		case 1:
+			x = Player.getX() + Player.getBoundX();
+			y = Player.getY() + Player.getBoundY() / 2;
+		}
+		
 		live = true;
 	}
 }
-void weapon::Updateweapon(int WIDTH)
+void weapon::Updateweapon(int WIDTH, int HEIGHT)
 {
 	if(live)
 	{
-		x += speed;
-		if(x > WIDTH)
+		switch (dir) {
+		case 0:
+			y -= speed;
+			if (y < 0)
 			live = false;
+			break;
+		case 1:
+			x += speed;
+			if (x > WIDTH)
+			live = false;
+			break;
+		}
 	}
 }
 void weapon::Collideweapon(BadGuy BadGuys[], int cSize)

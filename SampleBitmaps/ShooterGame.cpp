@@ -82,7 +82,7 @@ int main(void)
 			if(keys[RIGHT])
 				myPlayer.MoveRight(WIDTH, BadGuys, NUM_BadGuyS);
 			for(int i=0;i<NUM_weapons;i++)
-				weapons[i].Updateweapon(WIDTH);
+				weapons[i].Updateweapon(WIDTH, HEIGHT);
 			for(int i=0;i<NUM_BadGuyS;i++)
 				BadGuys[i].StartBadGuy(WIDTH,HEIGHT, BadGuys, NUM_BadGuyS);
 			for(int i=0;i<NUM_weapons;i++)
