@@ -1,3 +1,6 @@
+//Alexander Young
+//Lab 7
+
 #ifndef PLAYERH
 #define PLAYERH
 #include <allegro5\allegro.h>

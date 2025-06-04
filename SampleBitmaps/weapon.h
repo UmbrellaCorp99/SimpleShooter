@@ -1,3 +1,6 @@
+//Alexander Young
+//Lab 7
+
 #ifndef WEAPONH
 #define WEAPONH
 #include "BadGuy.h"

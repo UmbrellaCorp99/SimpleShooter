@@ -1,3 +1,6 @@
+//Alexander Young
+//Lab 7
+
 #include "BadGuy.h"
 
 //Deconstructor for the BadGuy class

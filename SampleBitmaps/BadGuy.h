@@ -1,3 +1,6 @@
+//Alexander Young
+//Lab 7
+
 #ifndef BADGUYH
 #define BADGUYH
 #include <allegro5\allegro.h>
